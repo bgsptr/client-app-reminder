@@ -12,7 +12,7 @@ const UseRouteControl = () => {
   const {srcPoint, destPoint} = mark;
 
   const waypoints = [
-    srcPoint ? L.latLng(srcPoint.lat, srcPoint.lng) : null,
+  srcPoint && L.latLng(srcPoint.lat, srcPoint.lng),
     destPoint ? L.latLng(destPoint.lat, destPoint.lng) : null,
   ].filter((point) => point !== null);
 

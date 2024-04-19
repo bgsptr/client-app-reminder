@@ -10,8 +10,8 @@ export const EventProvider = ({ children }) => {
     distance: 0
   })
   const [mark, setMark] = useState({
-    srcPoint: {lat: -8.634368, lng: 115.1893504},
-    destPoint: {lat: -8.797549, lng: 115.171829}
+    srcPoint: null,
+    destPoint: null
   });
   // const [destPoint, SetDestPoint] = useState({});
 
@@ -23,6 +23,24 @@ export const EventProvider = ({ children }) => {
     detailEvent,
     setDetailEvent
   };
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        setDetailEvent(data => ({
+          ...data,
+          srcPoint: {
+            latitude,
+            longitude
+          }
+        }))
+      });
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  }, [])
 
   useEffect(() => {
     console.log(location);
