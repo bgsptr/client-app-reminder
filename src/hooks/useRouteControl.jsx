@@ -1,24 +1,32 @@
-import L from 'leaflet';
-import { useEvent } from './useEvent';
-import { useEffect } from 'react';
+import L from "leaflet";
+import { useEvent } from "./useEvent";
+import { useEffect } from "react";
+import { useMap } from "react-leaflet";
 
-const useRouteControl = () => {
-    const { srcPoint, destPoint } = useEvent()
-    // if destPoint == null {
-    //     return
-    // }
+const UseRouteControl = () => {
+  const { mark } = useEvent();
+  const map = useMap();
 
-    // useEffect(() => {
-        
-    // })
-    const instance = L.Routing.control({
-    //   waypoints: [
-    //     srcPoint ? L.latLng(srcPoint.lat, srcPoint.lng) : null,
-    //     destPoint ? L.latLng(destPoint.lat, destPoint.lng) : null
-    //   ].filter(point => point !== null),
-    });
-  
-    return instance;
+  const waypoints = [
+    mark.srcPoint ? L.latLng(mark.srcPoint.lat, mark.srcPoint.lng) : null,
+    mark.destPoint ? L.latLng(mark.destPoint.lat, mark.destPoint.lng) : null,
+  ].filter((point) => point !== null);
+
+  useEffect(() => {
+    if (waypoints.length === 2) {
+      const routingControl = L.Routing.control({
+        waypoints: waypoints,
+      });
+
+      map.addControl(routingControl);
+
+      return () => {
+        map.removeControl(routingControl);
+      };
+    }
+  }, [waypoints, map]);
+
+  return null;
 };
 
-export default useRouteControl
+export default UseRouteControl;

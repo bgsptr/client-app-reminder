@@ -6,8 +6,8 @@ export const EventContext = createContext({});
 export const EventProvider = ({ children }) => {
   const [location, setLocation] = useState("");
   const [mark, setMark] = useState({
-    srcPoint: {lat: 0, lng: 0},
-    destPoint: {lat: 0, lng: 0}
+    srcPoint: {lat: -8.634368, lng: 115.1893504},
+    destPoint: {lat: -8.797549, lng: 115.171829}
   });
   // const [destPoint, SetDestPoint] = useState({});
 
@@ -23,7 +23,7 @@ export const EventProvider = ({ children }) => {
   }, [location]);
 
   useEffect(() => {
-    console.log(mark.srcPoint.lat);
+    console.log(mark);
   }, [mark]);
 
   return (

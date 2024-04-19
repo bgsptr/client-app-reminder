@@ -13,14 +13,15 @@ import L from "leaflet";
 // import { useEventContext } from '../context/EventContext';
 import { useEvent } from "../hooks/useEvent";
 import useRouteControl from "../hooks/useRouteControl";
+import RoutingControl from "./RoutingControl";
 
 const SearchField = ({ provider }) => {
   const { setLocation, setMark } = useEvent();
   const prov = provider;
   const map = useMap();
-  const routeControl = useRouteControl();
+  // const routeControl = RoutingControl();
 
-  const [dot, setDot] = useState({});
+  // const [dot, setDot] = useState({});
 
   function searchEventHandler(result) {
     // console.log(result.location);
@@ -68,17 +69,19 @@ const SearchField = ({ provider }) => {
 
     map.addControl(searchControl);
     map.on("geosearch/showlocation", searchEventHandler);
-    routeControl.on("routesfound", (event) => {
-      var routes = event.routes;
-      var summary = routes[0].summary;
-      console.log(
-        "Total distance is " +
-          summary.totalDistance / 1000 +
-          " km and total time is " +
-          Math.round((summary.totalTime % 3600) / 60) +
-          " minutes"
-      );
-    });
+
+    // get time of route control
+    // routeControl.on("routesfound", (event) => {
+    //   var routes = event.routes;
+    //   var summary = routes[0].summary;
+    //   console.log(
+    //     "Total distance is " +
+    //       summary.totalDistance / 1000 +
+    //       " km and total time is " +
+    //       Math.round((summary.totalTime % 3600) / 60) +
+    //       " minutes"
+    //   );
+    // });
 
     map.on("locationfound", onLocationFound);
     map.on("locationerror", (e) => {

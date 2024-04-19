@@ -8,13 +8,14 @@ import "leaflet/dist/leaflet.css";
 import SearchField from "./SearchField";
 
 import RoutingControl from "./RoutingControl";
+import UseRouteControl from "../hooks/useRouteControl";
 
 const LeafletMap = () => {
   const prov = new OpenStreetMapProvider();
   return (
     <MapContainer
       center={[51.505, -0.09]}
-      zoom={8}
+      zoom={3}
       style={{ height: "900px", width: "100%" }}
       attributionControl={false}
     >
@@ -39,7 +40,7 @@ const LeafletMap = () => {
         // searchLabel={"Enter address, please"}
         // keepResult={true}
       />
-      <RoutingControl />
+      <UseRouteControl />
     </MapContainer>
   );
 };
