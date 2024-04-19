@@ -12,8 +12,6 @@ import L from "leaflet";
 // import EventContext from '../context/EventContext';
 // import { useEventContext } from '../context/EventContext';
 import { useEvent } from "../hooks/useEvent";
-import useRouteControl from "../hooks/useRouteControl";
-import RoutingControl from "./RoutingControl";
 
 const SearchField = ({ provider }) => {
   const { setLocation, setMark } = useEvent();
